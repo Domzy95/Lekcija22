@@ -24,12 +24,13 @@
         <div id="control-panel-coordinates">
           <p>
             Koordinate: <br />
-            x: 12345 <br />
-            y: 532412
+            <div id="x"></div> <br />
+            <div id="y"></div>
           </p>
         </div>
         <button id="throw-bomb-button">VRZI BOMBO</button>
       </div>
+      <input id="strong-slider" type="range" min="1" max="10" value="5" onchange="handleThrowBomb()">
       <div id="control-panel-right">
         <p id="date"></p>
       </div>
