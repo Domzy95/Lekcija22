@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <title>Bomber APP</title>
+  </head>
+  <body>
+    <div id="map-container"></div>
+    <div id="control-panel">
+      <div id="control-panel-left">
+        <div id="control-panel-coordinates">
+          <p>
+            Koordinate: <br />
+            x: 12345 <br />
+            y: 532412
+          </p>
+        </div>
+        <button id="throw-bomb-button">VRZI BOMBO</button>
+      </div>
+      <div id="control-panel-right">
+        <p id="date"></p>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
