@@ -21,7 +21,20 @@ function onMapClick(e) {
   currentMarker = L.marker(coordinates).addTo(map);
   currentPointerCoordinates = coordinates;
   updateCoordinates();
+
+  //* Calculate distance between two markers
+  if (previousPointerCoordinates) {
+    const distance = calculateDistance(
+      previousPointerCoordinates,
+      currentPointerCoordinates
+    );
+    updateDistance(distance);
+  }
+  previousPointerCoordinates = currentPointerCoordinates;
 }
+
+let previousPointerCoordinates = null;
+
 map.on("click", onMapClick);
 
 //*UPDATE COORDINATES
@@ -44,8 +57,6 @@ function handleThrowBomb() {
   }).addTo(map);
 }
 
-updateCoordinates();
-
 //*DATUM IN URA
 function showDate() {
   const dateText = document.getElementById("date");
@@ -57,3 +68,35 @@ function showDate() {
 }
 showDate();
 setInterval(showDate, 1000);
+updateCoordinates();
+
+//*CALCULATE DISTANCE BETWEEN 2 MARKERS
+function calculateDistance(point1, point2) {
+  const R = 6371; // Radius of the earth in km
+  const dLat = deg2rad(point2[0] - point1[0]); // deg2rad below
+  const dLon = deg2rad(point2[1] - point1[1]);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(point1[0])) *
+      Math.cos(deg2rad(point2[0])) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c; // Distance in km
+  return distance;
+}
+
+//*CONVERTS DEG TO RADIUS
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+//*UPDATE DISTANCE
+function updateDistance(distance) {
+  document.getElementById("distance").innerText =
+    `Total Distance: ${distance.toFixed(2)} km`;
+}
+//*RESET DISTANCE
+function resetDistance() {
+  document.getElementById("distance").innerText = "Total Distance: 0.00 km";
+  previousPointerCoordinates = null;
+}
